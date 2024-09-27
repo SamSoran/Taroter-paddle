@@ -5,7 +5,17 @@ export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req: request, res });
 
-  await supabase.auth.getSession();
+  // Use getUser() instead of getSession()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // You can perform additional checks here if needed
+  // For example, you might want to redirect unauthenticated users
+  if (!user) {
+    // Optionally redirect to login page
+    // return NextResponse.redirect(new URL('/login', request.url));
+  }
 
   return res;
 }
