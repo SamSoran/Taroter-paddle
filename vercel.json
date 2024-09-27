@@ -1,7 +1,16 @@
 {
+    "version": 3,
+    "build": {
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
     "functions": {
-      "api/*.js": {
-        "runtime": "vercel-node@20.x"
+      "api/**/*.ts": {
+        "runtime": "nodejs20.x"
+      },
+      "middleware.ts": {
+        "runtime": "edge-nodejs20.x"
       }
     }
   }
